@@ -40,23 +40,28 @@ export default function Users(props) {
         if (params.page == 1) {
           if (isEmpty(response)) {
             setUsers([]);
-            setBtnLoading(0); // No hay resultados, ocultamos botón
+            setBtnLoading(0); // No hay nadie, escondemos botón
           } else {
             setUsers(response);
-            // Si hay 20 o más, activamos el botón por si hay más páginas
-            // Si hay menos de 20, asumimos que no hay más datos que cargar
-            if (response.length >= 20) {
-              setBtnLoading(false);
+            // IMPORTANTE: Si llegan 9 o más, es probable que haya otra página
+            if (response.length >= 9) {
+              setBtnLoading(false); // Mostramos "Cargar más"
             } else {
-              setBtnLoading(0);
+              setBtnLoading(0); // Son pocos, no hay más que cargar
             }
           }
         } else {
+          // Para páginas 2, 3...
           if (!response || isEmpty(response)) {
-            setBtnLoading(0);
+            setBtnLoading(0); // Se acabó la lista
           } else {
             setUsers([...users, ...response]);
-            setBtnLoading(false);
+            // Si esta nueva carga trajo menos de 9, ya no hay más
+            if (response.length < 9) {
+              setBtnLoading(0);
+            } else {
+              setBtnLoading(false);
+            }
           }
         }
       })
