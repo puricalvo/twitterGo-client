@@ -19,14 +19,20 @@ export default function Users(props) {
   const [users, setUsers] = useState(null);
   const [typeUser, setTypeUser] = useState(params.type || "follow");
   const [btnLoading, setBtnLoading] = useState(false);
+  const [searchText, setSearchText] = useState(params.search || "");
 
   const onSearch = useDebouncedCallback((value) => {
     setUsers(null);
-    setBtnLoading(false); // Reseteamos el botón al buscar
     navigate({
       search: queryString.stringify({ ...params, search: value, page: 1 }),
     });
   }, 200);
+
+  const handleSearchChange = (e) => {
+    const val = e.target.value;
+    setSearchText(val);
+    onSearch(val);
+  };
 
   useEffect(() => {
     getFollowsApi(queryString.stringify(params))
@@ -34,15 +40,20 @@ export default function Users(props) {
         if (params.page == 1) {
           if (isEmpty(response)) {
             setUsers([]);
+            setBtnLoading(0); // No hay resultados, ocultamos botón
           } else {
             setUsers(response);
+            // Si hay 20 o más, activamos el botón por si hay más páginas
+            // Si hay menos de 20, asumimos que no hay más datos que cargar
+            if (response.length >= 20) {
+              setBtnLoading(false);
+            } else {
+              setBtnLoading(0);
+            }
           }
-          // Si los resultados iniciales son pocos, ocultamos botón
-          if (response?.length < 1) setBtnLoading(0);
-          else setBtnLoading(false);
         } else {
           if (!response || isEmpty(response)) {
-            setBtnLoading(0); // Ya no hay más que cargar
+            setBtnLoading(0);
           } else {
             setUsers([...users, ...response]);
             setBtnLoading(false);
@@ -51,16 +62,15 @@ export default function Users(props) {
       })
       .catch(() => {
         setUsers([]);
+        setBtnLoading(0);
       });
   }, [location]);
 
-  // ESTA FUNCIÓN AHORA LIMPIA EL BUSCADOR
   const onChangeType = (type) => {
     setUsers(null);
-    setBtnLoading(false); // Importante: resetear el botón para que vuelva a aparecer
+    setBtnLoading(false); // Reseteamos para que el botón pueda volver a aparecer
     setTypeUser(type);
-
-    // Al navegar, forzamos search: "" para limpiar el buscador
+    setSearchText("");
     navigate({
       search: queryString.stringify({
         type: type,
@@ -68,10 +78,6 @@ export default function Users(props) {
         search: "",
       }),
     });
-
-    // Limpiamos visualmente el input si fuera necesario
-    const inputSearch = document.querySelector(".users__title input");
-    if (inputSearch) inputSearch.value = "";
   };
 
   const moreData = () => {
@@ -93,8 +99,8 @@ export default function Users(props) {
         <input
           type="text"
           placeholder="Busca un usuario..."
-          defaultValue={params.search || ""}
-          onChange={(e) => onSearch(e.target.value)}
+          value={searchText}
+          onChange={handleSearchChange}
         />
       </div>
 
@@ -122,7 +128,7 @@ export default function Users(props) {
         <>
           <ListUsers users={users} />
 
-          {/* Lógica del botón: solo si no es 0 (que significa "no hay más") */}
+          {/* Mostramos el botón siempre que btnLoading no sea 0 */}
           {btnLoading !== 0 && (
             <Button onClick={moreData} className="load-more">
               {!btnLoading ? (
@@ -148,7 +154,7 @@ function useUsersQuery(location) {
   const {
     page = 1,
     type = "follow",
-    search,
+    search = "",
   } = queryString.parse(location.search);
   return { page, type, search };
 }
