@@ -1,0 +1,53 @@
+@import "../../scss/index.scss";
+
+.list-tweets {
+    .tweet {
+        display: flex;
+        padding: 10px 20px;
+        border-bottom: 1px solid $border-grey;
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+        }
+
+        .name {
+            font-weight: bold;
+
+            span {
+                margin-left: 10px;
+                font-size: 12px;
+                font-weight: normal;
+                color: $font-grey;
+            }
+
+            .btn-delete {
+                color: #e0245e; // Rojo Twitter
+                font-size: 13px;
+                font-weight: bold;
+                text-decoration: none;
+                padding: 2px 8px;
+                border-radius: 50px;
+                transition: background-color 0.2s;
+
+                &:hover {
+                    background-color: rgba(224, 36, 94, 0.1); // Un fondo rosado suave al pasar el ratón
+                    color: #bc1d4a;
+                }
+            }
+        }
+
+        .mensaje {
+            a {
+                color: $primary;
+                text-decoration: none;
+
+                &:hover {
+                color: $primary; // Aquí pon la variable del color que quieras o un color fijo como #00acee
+                text-decoration: none; // Asegura que no aparezca la raya al hacer hover
+        }
+            }
+        }
+    }
+}

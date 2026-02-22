@@ -1,0 +1,26 @@
+@import "../../scss/index.scss";
+
+.list-users {
+    padding: 0;
+
+    &__user {
+        padding: 15px 30px;
+        columns: $font-light;
+        border-bottom: 1px solid $border-grey;
+
+        &:hover {
+            color: $font-light;
+            background-color: $background-dark-light;
+            text-decoration: none;
+        }
+    }
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #374151;
+  opacity: 0.8;
+}

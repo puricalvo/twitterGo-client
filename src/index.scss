@@ -1,0 +1,98 @@
+@import "./scss/index.scss";
+
+html, body{
+  cursor: auto !important;
+}
+
+button,
+a,
+input,
+textarea {
+  cursor: pointer !important;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $background-grey-dark;
+  color: $font-light;
+  
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+.btn {
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+.btn.btn-primary {
+  background-color: $primary;
+  border-color: $primary;
+
+  &:hover {
+    background-color: rgba(26, 145, 218, 1);
+  }
+}
+
+.btn.btn-outline-primary {
+  border-color: $border-primary;
+  color: $primary;
+
+  &:hover, &:active, &:focus {
+    background-color: rgba(29, 161, 242, 0.2) !important;
+    
+  }
+}
+
+
+input.form-control,
+textarea.form-control {
+  background-color: $background-dark-light;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid $border-grey;
+  color: $font-light !important;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    opacity: 1; // MUY importante
+  }
+
+  &:focus {
+    background-color: $background-dark-light;
+    box-shadow: none;
+    border-bottom: 1px solid $border-primary;
+  }
+  
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+  height: 38px;
+
+  .react-datepicker__input-container {
+    height: 100%;
+
+    input {
+      background-color: $background-dark-light;
+      border-radius: 0;
+      border: 0;
+      border-bottom: 1px solid $border-grey;
+      color: $font-light !important;
+      width: 100%;
+      height: 100%;
+      padding: 0 12px;
+    }
+  }
+}
+
