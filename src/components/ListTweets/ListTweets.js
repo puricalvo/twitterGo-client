@@ -33,7 +33,6 @@ function Tweet(props) {
 
   const deleteTweet = () => {
     deleteTweetApi(tweet._id).then((response) => {
-      console.log("LOGUEADO", loggedUser);
       if (response?.code === 200) {
         toast.success("Tweet eliminado", {
           theme: "colored",
