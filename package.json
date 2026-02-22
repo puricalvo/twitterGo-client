@@ -2,6 +2,7 @@
   "name": "twittergo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://puricalvo.github.io/twitterGo-client",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
@@ -33,7 +34,9 @@
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +57,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-bootstrap": "^1.0.1"
+    "@types/react-bootstrap": "^1.0.1",
+    "gh-pages": "^6.3.0"
   }
 }
