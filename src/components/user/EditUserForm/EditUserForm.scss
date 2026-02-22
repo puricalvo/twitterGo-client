@@ -1,69 +1,91 @@
 @import "../../../scss/index.scss";
 
 .edit-user-form {
-    .banner {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 180px;
-        background-color: $background-dark-light;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        padding: -20px !important;
-
-        &:hover {
-            cursor: pointer;
-        }
-
-        svg {
-            width: 30px;
-            fill: $font-light;
-            &:hover {
-                fill: $font-dark;
-            }
-        }
+  .banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px; // Más bajito en móvil dentro del modal
+    background-color: $background-dark-light;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    @media (min-width: 768px) {
+      height: 180px; // Altura original para PC
     }
 
-    .avatar {
-        position: relative;
-        top: -50px;
-        left: 20px;
-        background-color: $background-dark-light;
-        width: 120px;
-        height: 120px;
-        border: 4px solid $border-dark;
-        border-radius: 50%;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    &:hover { cursor: pointer; }
 
-        &:hover {
-            cursor: pointer;
-        }
+    svg {
+      width: 30px;
+      fill: $font-light;
+      transition: fill 0.2s;
+      &:hover { fill: $font-dark; }
+    }
+  }
 
-        svg {
-            width: 30px;
-            fill: $font-light;
+  .avatar {
+    position: relative;
+    top: -40px; // Subimos un poco menos en móvil
+    left: 15px;
+    background-color: $background-dark-light;
+    width: 80px; // Avatar más pequeño en el modal móvil
+    height: 80px;
+    border: 4px solid $border-dark;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            &:hover {
-                fill: $font-dark;
-            }
-        }
+    @media (min-width: 768px) {
+      width: 120px;
+      height: 120px;
+      top: -50px;
+      left: 20px;
+    }
+
+    &:hover { cursor: pointer; }
+
+    svg {
+      width: 25px;
+      fill: $font-light;
+      @media (min-width: 768px) { width: 30px; }
+
+      &:hover { fill: $font-dark; }
+    }
+  }
+  
+  form {
+    padding: 0 15px 15px 15px; // Menos padding lateral en móvil
+    margin-top: -30px; // Compensamos la subida del avatar
+
+    @media (min-width: 768px) {
+      padding: 0 20px 20px 20px;
     }
     
-    form {
-        padding: 0 20px 20px 20px;
-        
-        .btn-submit {
-            position: absolute;
-            top: -44px;
-            right: 25px;
-            border-radius: 50px;
-            padding: 4px 15px 4px 15px;
-        }
+    .btn-submit {
+      position: absolute;
+      top: -45px; // Se mantiene arriba a la derecha del modal
+      right: 15px;
+      border-radius: 50px;
+      padding: 5px 20px;
+      font-size: 14px;
+      font-weight: bold;
+
+      @media (min-width: 768px) {
+        top: -44px;
+        right: 25px;
+        font-size: 16px;
+      }
     }
+
+    // Ajuste para los inputs si usas Row/Col de Bootstrap
+    .row {
+      margin-bottom: 15px;
+    }
+  }
 }

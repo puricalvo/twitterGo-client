@@ -1,41 +1,55 @@
 @import "../../../scss/index.scss";
 
 .info-user {
-    margin: 20px;
+    margin: 15px; // Un poco menos de margen en móvil
+    @media (min-width: 768px) { margin: 20px; }
 
-    * {
-        margin: 0;
-    }
+    * { margin: 0; }
 
     svg {
         width: 15px;
         height: 15px;
         fill: $font-grey;
     }
+
     .name {
         font-size: 18px;
         font-weight: bold;
+        @media (min-width: 768px) { font-size: 22px; }
     }
+
     .email {
         font-size: 14px;
         color: $font-grey;
+        margin-bottom: 5px;
     }
 
     .description {
-        margin: 10px 0;
+        margin: 12px 0;
         white-space: pre-line;
+        font-size: 15px;
+        color: $font-light;
     }
 
     .more-info {
         display: flex;
+        flex-wrap: wrap; // FUNDAMENTAL: permite que los iconos bajen si no caben
         align-items: center;
 
         p, a {
+            display: flex;
+            align-items: center;
             color: $font-grey;
-            padding-right: 20px;
+            font-size: 14px;
+            padding-right: 15px; // Espacio entre elementos
+            margin-bottom: 8px; // Espacio hacia abajo si saltan de línea
+            
+            // Evitar que enlaces larguísimos rompan el móvil
+            word-break: break-all; 
 
             svg {
-                margin-right: 10px;
+                margin-right: 7px;
+                min-width: 15px; // Para que el icono no se encoja
             }
         }
 
@@ -44,9 +58,9 @@
             text-decoration: none; 
 
             &:hover {
-             color: $primary;
-            text-decoration: none; 
-        }
+                color: $primary;
+                text-decoration: underline; // Un toque de accesibilidad al pasar el ratón
+            }
         }
     }
 }

@@ -7,6 +7,8 @@ import {
   faUser,
   faUsers,
   faPowerOff,
+  faPen,
+  faFeatherPointed,
 } from "@fortawesome/free-solid-svg-icons";
 import TweetModal from "../Modal/TweetModal";
 import { logoutApi } from "../../api/auth";
@@ -30,19 +32,25 @@ export default function LeftMenu(props) {
       <img className="logo" src={LogoWhite} alt="Twittor" />
 
       <Link to="/">
-        <FontAwesomeIcon icon={faHouseChimney} /> Inicio
+        <FontAwesomeIcon icon={faHouseChimney} /> <span>Inicio</span>
       </Link>
       <Link to="/users">
-        <FontAwesomeIcon icon={faUsers} /> Usuarios
+        <FontAwesomeIcon icon={faUsers} /> <span>Usuarios</span>
       </Link>
       <Link to={`/${user?._id}`}>
-        <FontAwesomeIcon icon={faUser} /> Perfil
+        <FontAwesomeIcon icon={faUser} /> <span>Perfil</span>
       </Link>
       <Link to="" onClick={logout}>
-        <FontAwesomeIcon icon={faPowerOff} /> Cerrar sesión
+        <FontAwesomeIcon icon={faPowerOff} /> <span>Cerrar sesión</span>
       </Link>
 
-      <Button onClick={() => setShowModal(true)}>Twittear</Button>
+      <Button onClick={() => setShowModal(true)}>
+        {/* Este span se ocultará en pantallas pequeñas */}
+        <span className="text">Twittear</span>
+
+        {/* Este icono solo aparecerá en pantallas pequeñas (puedes usar un + o un icono de pluma) */}
+        <FontAwesomeIcon icon={faFeatherPointed} className="icon-mobile" />
+      </Button>
 
       <TweetModal show={showModal} setShow={setShowModal} />
     </div>

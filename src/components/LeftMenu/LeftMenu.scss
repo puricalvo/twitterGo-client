@@ -6,16 +6,17 @@
     flex-direction: column;
     min-height: 100vh;
     border-right: 1px solid $border-grey;
+    padding-left: 10px; // Un poco de aire al borde izquierdo
 
     .logo {
-        width: 50px;
+        width: 40px;
+        @media (min-width: 768px) { width: 50px; }
         padding: 20px 0 30px 0;
     }
 
-    
-
     a {
-        font-size: 20px;
+        display: flex;
+        align-items: center;
         color: $font-light;
         font-weight: bold;
         margin-bottom: 30px;
@@ -27,17 +28,78 @@
         }
 
         svg {
-            margin-right: 20px;
-            width: 30px !important;
+            margin-right: 0; // Sin margen en móvil porque no hay texto al lado
+            width: 25px !important;
+            font-size: 20px;
+
+            @media (min-width: 768px) { 
+                margin-right: 20px; // Recuperamos el margen en PC
+                width: 30px !important; 
+            }
+        }
+
+        span {
+            display: none; // EL TRUCO: En móvil el texto NO EXISTE
+
+            @media (min-width: 768px) { 
+                display: inline; // En PC el texto aparece
+            }
         }
     }
 
     button {
-        width: 80%;
-        border-radius: 50px;
-        font-size: 18px;
-        padding: 10px;
-        margin-top: 30px;
+        background-color: $primary;
+        color: white;
+        border: none;
         font-weight: bold;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* --- ESTILO MÓVIL (CÍRCULO) --- */
+        width: 45px;      // Ancho fijo para que sea un círculo
+        height: 45px;     // Alto igual al ancho
+        border-radius: 50%; 
+        padding: 0;
+        margin-top: 20px;
+
+        .text {
+            display: none; // ESCONDEMOS LA PALABRA "TWITTEAR"
+        }
+
+        .icon-mobile {
+            display: block; // MOSTRAR ICONO O "+"
+            font-size: 20px;
+        }
+
+        &:active {
+            background-color: darken($primary, 10%);
+            transform: scale(0.9); // Efecto de pulsado
+        }
+
+        /* --- ESTILO PC (BOTÓN ALARGADO) --- */
+        @media (min-width: 768px) {
+            width: 80%;
+            height: auto;
+            border-radius: 50px;
+            padding: 10px;
+            
+            .text {
+                display: inline; // MOSTRAR "TWITTEAR"
+                font-size: 18px;
+            }
+
+            .icon-mobile {
+                display: none; // ESCONDER ICONO
+            }
+
+            &:hover {
+                background-color: darken($primary, 5%);
+                cursor: pointer;
+            }
+        }
     }
-}
+
+    
+} 

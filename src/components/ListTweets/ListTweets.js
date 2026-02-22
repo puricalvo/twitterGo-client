@@ -68,18 +68,23 @@ function Tweet(props) {
         <div className="name">
           {userInfo?.nombre} {userInfo?.apellidos}
           <span className="fecha">{moment(tweet.fecha).calendar()}</span>
-          {loggedUser?._id === tweet.userid && (
-            <Button variant="link" className="btn-delete" onClick={deleteTweet}>
-              Eliminar
-            </Button>
-          )}
         </div>
+
         <div
           className="mensaje"
           dangerouslySetInnerHTML={{
             __html: replaceURLWithHTMLLinks(tweet.mensaje),
           }}
         />
+
+        {/* BOTÓN ABAJO A LA DERECHA */}
+        {loggedUser?._id === tweet.userid && (
+          <div className="tweet-actions">
+            <Button variant="link" className="btn-delete" onClick={deleteTweet}>
+              Eliminar
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

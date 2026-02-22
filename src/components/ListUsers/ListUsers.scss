@@ -1,20 +1,67 @@
 @import "../../scss/index.scss";
 
+@import "../../scss/index.scss";
+
 .list-users {
     padding: 0;
+    list-style: none;
 
     &__user {
-        padding: 15px 30px;
-        columns: $font-light;
+        display: flex; // Imagen y texto en línea
+        align-items: center;
+        padding: 12px 15px; // Padding reducido para móviles
+        @media (min-width: 768px) { padding: 15px 30px; }
+        
         border-bottom: 1px solid $border-grey;
+        transition: background-color 0.2s;
 
         &:hover {
             color: $font-light;
             background-color: $background-dark-light;
             text-decoration: none;
         }
+
+        // Estilo para la imagen (Image de bootstrap)
+        img {
+            min-width: 50px; // Para que no se aplaste
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            @media (min-width: 768px) {
+                width: 64px;
+                height: 64px;
+                min-width: 64px;
+            }
+        }
+
+        // Estilo para el contenedor del nombre y biografía
+        span {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; // Corta el texto que se salga
+            width: 100%;
+
+            h5 {
+                margin: 0;
+                font-size: 15px;
+                font-weight: bold;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis; // Añade "..." si el nombre es largo
+                @media (min-width: 768px) { font-size: 18px; }
+            }
+
+            p {
+                margin: 0;
+                font-size: 13px;
+                color: $font-grey;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis; // Añade "..." si la bio es larga
+            }
+        }
     }
-}
+
 
 .empty-state {
   text-align: center;
@@ -23,4 +70,5 @@
   font-weight: 600;
   color: #374151;
   opacity: 0.8;
+}
 }

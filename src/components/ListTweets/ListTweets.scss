@@ -3,50 +3,55 @@
 .list-tweets {
     .tweet {
         display: flex;
-        padding: 10px 20px;
+        padding: 10px 15px;
         border-bottom: 1px solid $border-grey;
 
         .avatar {
             width: 50px;
             height: 50px;
-            margin-right: 20px;
+            margin-right: 15px;
         }
 
-        .name {
-            font-weight: bold;
+        .tweet-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
 
-            span {
-                margin-left: 10px;
-                font-size: 12px;
-                font-weight: normal;
-                color: $font-grey;
-            }
-
-            .btn-delete {
-                color: #e0245e; // Rojo Twitter
-                font-size: 13px;
+            .name {
                 font-weight: bold;
-                text-decoration: none;
-                padding: 2px 8px;
-                border-radius: 50px;
-                transition: background-color 0.2s;
-
-                &:hover {
-                    background-color: rgba(224, 36, 94, 0.1); // Un fondo rosado suave al pasar el ratón
-                    color: #bc1d4a;
+                .fecha {
+                    margin-left: 10px;
+                    font-weight: normal;
+                    color: $font-grey;
+                    font-size: 12px;
                 }
             }
-        }
 
-        .mensaje {
-            a {
-                color: $primary;
-                text-decoration: none;
+            .mensaje {
+                margin-top: 5px;
+                font-size: 15px;
+            }
 
-                &:hover {
-                color: $primary; // Aquí pon la variable del color que quieras o un color fijo como #00acee
-                text-decoration: none; // Asegura que no aparezca la raya al hacer hover
-        }
+            /* --- AQUÍ ESTÁ EL ARREGLO --- */
+            .tweet-actions {
+                display: flex;
+                justify-content: flex-end; // Lo manda a la derecha
+                width: 100%;
+
+                .btn-delete.btn.btn-link { // Usamos clases triples para ganar a Bootstrap
+                    color: #e0245e !important; // ROJO SI O SI
+                    text-decoration: none !important; // FUERA RAYA
+                    font-size: 13px;
+                    font-weight: bold;
+                    padding: 0;
+                    margin-top: 5px;
+
+                    &:hover {
+                        color: darken(#e0245e, 10%) !important;
+                        text-decoration: none !important; // Que no salga la raya al pasar el mouse
+                        background-color: transparent;
+                    }
+                }
             }
         }
     }
