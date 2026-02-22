@@ -16,17 +16,13 @@ export default function Users(props) {
   const location = useLocation();
   const params = useUsersQuery(location);
 
-  //console.log(location);
-  //console.log(params);
-  //console.log(queryString.stringify(params));
-
-  const [users, setUsers] = useState(null); // null = cargando
+  const [users, setUsers] = useState(null);
   const [typeUser, setTypeUser] = useState(params.type || "follow");
   const [btnLoading, setBtnLoading] = useState(false);
 
-  // Buscador con debounce
   const onSearch = useDebouncedCallback((value) => {
-    setUsers(null); // reiniciamos estado mientras carga
+    setUsers(null);
+    setBtnLoading(false); // Reseteamos el botón al buscar
     navigate({
       search: queryString.stringify({ ...params, search: value, page: 1 }),
     });
@@ -41,9 +37,12 @@ export default function Users(props) {
           } else {
             setUsers(response);
           }
+          // Si los resultados iniciales son pocos, ocultamos botón
+          if (response?.length < 1) setBtnLoading(0);
+          else setBtnLoading(false);
         } else {
-          if (!response) {
-            setBtnLoading(0);
+          if (!response || isEmpty(response)) {
+            setBtnLoading(0); // Ya no hay más que cargar
           } else {
             setUsers([...users, ...response]);
             setBtnLoading(false);
@@ -55,13 +54,13 @@ export default function Users(props) {
       });
   }, [location]);
 
+  // ESTA FUNCIÓN AHORA LIMPIA EL BUSCADOR
   const onChangeType = (type) => {
     setUsers(null);
-    if (type === "new") {
-      setTypeUser("new");
-    } else {
-      setTypeUser("follow");
-    }
+    setBtnLoading(false); // Importante: resetear el botón para que vuelva a aparecer
+    setTypeUser(type);
+
+    // Al navegar, forzamos search: "" para limpiar el buscador
     navigate({
       search: queryString.stringify({
         type: type,
@@ -69,6 +68,10 @@ export default function Users(props) {
         search: "",
       }),
     });
+
+    // Limpiamos visualmente el input si fuera necesario
+    const inputSearch = document.querySelector(".users__title input");
+    if (inputSearch) inputSearch.value = "";
   };
 
   const moreData = () => {
@@ -90,19 +93,20 @@ export default function Users(props) {
         <input
           type="text"
           placeholder="Busca un usuario..."
+          defaultValue={params.search || ""}
           onChange={(e) => onSearch(e.target.value)}
         />
       </div>
 
       <ButtonGroup className="users__options">
         <Button
-          className={typeUser === "follow" && "active"}
+          className={typeUser === "follow" ? "active" : ""}
           onClick={() => onChangeType("follow")}
         >
           Siguiendo
         </Button>
         <Button
-          className={typeUser === "new" && "active"}
+          className={typeUser === "new" ? "active" : ""}
           onClick={() => onChangeType("new")}
         >
           Nuevos
@@ -117,19 +121,23 @@ export default function Users(props) {
       ) : (
         <>
           <ListUsers users={users} />
-          <Button onClick={moreData} className="load-more">
-            {!btnLoading ? (
-              btnLoading !== 0 && "Cargar mas usuarios"
-            ) : (
-              <Spinner
-                as="span"
-                animation="grow"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-              />
-            )}
-          </Button>
+
+          {/* Lógica del botón: solo si no es 0 (que significa "no hay más") */}
+          {btnLoading !== 0 && (
+            <Button onClick={moreData} className="load-more">
+              {!btnLoading ? (
+                "Cargar más usuarios"
+              ) : (
+                <Spinner
+                  as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              )}
+            </Button>
+          )}
         </>
       )}
     </BasicLayout>
