@@ -41,7 +41,7 @@ export default function EditUserForm(props) {
     getRootProps: getRootBannerProps,
     getInputProps: getInputBannerProps,
   } = useDropzone({
-    accept: "image/jpeg, image/png",
+    "image/*": [".jpeg", ".jpg", ".png"],
     noKeyboard: true,
     multiple: false,
     onDrop: onDropBanner,
@@ -56,7 +56,7 @@ export default function EditUserForm(props) {
     getRootProps: getRootAvatarProps,
     getInputProps: getInputAvatarProps,
   } = useDropzone({
-    accept: "image/jpeg, image/png",
+    "image/*": [".jpeg", ".jpg", ".png"],
     noKeyboard: true,
     multiple: false,
     onDrop: onDropAvatar,
