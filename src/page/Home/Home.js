@@ -72,6 +72,7 @@ function formatModel(tweets) {
       userid: tweet.userRelationId,
       mensaje: tweet.Tweet.mensaje,
       fecha: tweet.Tweet.fecha,
+      imagen: tweet.Tweet.imagen,
     });
   });
   return tweetsTemp;

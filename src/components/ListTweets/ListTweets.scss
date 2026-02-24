@@ -32,6 +32,16 @@
                 font-size: 15px;
             }
 
+            /* --- ESTILOS PARA LA IMAGEN DEL TWEET --- */
+            .image-tweet {
+                margin-top: 12px;
+                border-radius: 15px;
+                border: 1px solid $border-grey;
+                max-width: 100%;
+                max-height: 500px;
+                object-fit: contain; // Asegura que se vea la foto entera sin cortarse
+            }
+
             /* --- AQUÍ ESTÁ EL ARREGLO --- */
             .tweet-actions {
                 display: flex;

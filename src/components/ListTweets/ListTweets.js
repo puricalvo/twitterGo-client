@@ -76,6 +76,13 @@ function Tweet(props) {
             __html: replaceURLWithHTMLLinks(tweet.mensaje),
           }}
         />
+        {tweet?.imagen && (
+          <Image
+            src={`${S3_URL}${tweet.imagen}`}
+            className="image-tweet"
+            fluid
+          />
+        )}
 
         {/* BOTÓN ABAJO A LA DERECHA */}
         {loggedUser?._id === tweet.userid && (
