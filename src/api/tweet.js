@@ -1,10 +1,11 @@
 import { API_HOST } from "../utils/constant";
 import { getTokenApi } from "./auth";
 
-export function addTweetApi(mensaje) {
+export function addTweetApi(mensaje, imagen) {
   const url = `${API_HOST}/tweet`;
   const data = {
     mensaje,
+    imagen: imagen || "",
   };
 
   const params = {
@@ -15,15 +16,24 @@ export function addTweetApi(mensaje) {
     },
     body: JSON.stringify(data),
   };
+  console.log(data);
 
   return fetch(url, params)
     .then((response) => {
       if (response.status >= 200 && response.status < 300) {
-        return { code: response.status, message: "Tweet enviado." };
+        return { code: response.status, message: "Tweet enviado" };
       }
-      return { code: 500, message: "Error del servido." };
+
+      return response.json().then((errorData) => {
+        console.error("Error al enviar el tweet:", errorData);
+        return {
+          code: response.status,
+          message: errorData.message || "Error al enviar el tweet",
+        };
+      });
     })
     .catch((err) => {
+      console.error("Network or parsing error:", err);
       return err;
     });
 }
@@ -87,4 +97,52 @@ export function deleteTweetApi(idTweet) {
     .catch((err) => {
       return err;
     });
+}
+
+export function uploadImageTweetApi(file) {
+  const url = `${API_HOST}/tweetImage`;
+  const formData = new FormData();
+  formData.append("nombre", file);
+
+  const params = {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${getTokenApi()}`,
+    },
+    body: formData,
+  };
+
+  return fetch(url, params)
+    .then((response) => {
+      if (response.status === 200) {
+        return response.text();
+      }
+      return null;
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch(() => {
+      return null;
+    });
+}
+
+export async function getImagenTweetApi(nombreImagen) {
+  const url = `${API_HOST}/obtenerImageTweets?nombre=${nombreImagen}`;
+
+  const params = {
+    headers: {
+      Authorization: `Bearer ${getTokenApi()}`,
+    },
+  };
+
+  try {
+    const response = await fetch(url, params);
+    if (response.status !== 200) return null;
+
+    const blob = await response.blob();
+    return URL.createObjectURL(blob);
+  } catch (err) {
+    return null;
+  }
 }

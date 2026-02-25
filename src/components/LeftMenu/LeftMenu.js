@@ -25,6 +25,7 @@ export default function LeftMenu(props) {
   const logout = () => {
     logoutApi();
     setRefreshCheckLogin(true);
+    window.location.replace("");
   };
 
   return (

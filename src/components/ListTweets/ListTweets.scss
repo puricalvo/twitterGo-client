@@ -32,25 +32,37 @@
                 font-size: 15px;
             }
 
-            /* --- ESTILOS PARA LA IMAGEN DEL TWEET --- */
-            .image-tweet {
+            
+             .image-tweet {
                 margin-top: 12px;
+                width: 100%;
+                max-width: 500px; 
+                
+                
+                aspect-ratio: 16 / 9; 
+                height: auto; 
+                
+                display: block;
+                object-fit: initial;
+                
                 border-radius: 15px;
-                border: 1px solid $border-grey;
-                max-width: 100%;
-                max-height: 500px;
-                object-fit: contain; // Asegura que se vea la foto entera sin cortarse
-            }
+                border: 1px solid $border-grey; 
 
-            /* --- AQUÍ ESTÁ EL ARREGLO --- */
+                @media (max-width: 480px) {
+                    max-width: 100%; 
+                    
+                }
+            } 
+
+            
             .tweet-actions {
                 display: flex;
-                justify-content: flex-end; // Lo manda a la derecha
+                justify-content: flex-end; 
                 width: 100%;
 
-                .btn-delete.btn.btn-link { // Usamos clases triples para ganar a Bootstrap
-                    color: #e0245e !important; // ROJO SI O SI
-                    text-decoration: none !important; // FUERA RAYA
+                .btn-delete.btn.btn-link { 
+                    color: #e0245e !important; 
+                    text-decoration: none !important; 
                     font-size: 13px;
                     font-weight: bold;
                     padding: 0;
@@ -58,7 +70,7 @@
 
                     &:hover {
                         color: darken(#e0245e, 10%) !important;
-                        text-decoration: none !important; // Que no salga la raya al pasar el mouse
+                        text-decoration: none !important; 
                         background-color: transparent;
                     }
                 }

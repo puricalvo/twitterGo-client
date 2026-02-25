@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { Form, Button, Row, Col, Spinner } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import es from "date-fns/locale/es";
@@ -77,17 +77,14 @@ export default function EditUserForm(props) {
     setLoading(true);
 
     try {
-      // 1. Subir Banner
       if (bannerFile) {
         await uploadBannerApi(bannerFile);
       }
 
-      // 2. Subir Avatar
       if (avatarFile) {
         await uploadAvatarApi(avatarFile);
       }
 
-      // 3. Actualizar Info
       await updateInfoApi(formData).then(() => {
         setShowModal(false);
       });
@@ -109,7 +106,6 @@ export default function EditUserForm(props) {
     <div className="edit-user-form">
       <div
         className="banner"
-        // Importante: backgroundImage con la URL que tiene el "timestamp"
         style={{ backgroundImage: `url('${bannerUrl}')` }}
         {...getRootBannerProps()}
       >

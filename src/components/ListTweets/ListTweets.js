@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Image } from "react-bootstrap";
+import { Image, Button } from "react-bootstrap";
 import { map } from "lodash";
 import moment from "moment";
 import AvatarNoFound from "../../assets/png/avatar-no-found.png";
@@ -8,17 +8,16 @@ import { replaceURLWithHTMLLinks } from "../../utils/functions";
 import { getUserApi } from "../../api/user";
 import { deleteTweetApi } from "../../api/tweet";
 import userAuth from "../../hooks/userAuth";
-import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 import "./ListTweets.scss";
 
 export default function ListTweets(props) {
-  const { tweets, setReloadTweets } = props;
+  const { tweets, setReloadTweets } = props; //setReloadTweets
   return (
     <div className="list-tweets">
       {map(tweets, (tweet, index) => (
-        <Tweet key={index} tweet={tweet} setReloadTweets={setReloadTweets} />
+        <Tweet key={index} tweet={tweet} setReloadTweets={setReloadTweets} /> //setReloadTweets={setReloadTweets}
       ))}
     </div>
   );
@@ -28,30 +27,14 @@ function Tweet(props) {
   const { tweet, setReloadTweets } = props;
   const [userInfo, setUserInfo] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
-
   const loggedUser = userAuth();
 
-  const deleteTweet = () => {
-    deleteTweetApi(tweet._id).then((response) => {
-      if (response?.code === 200) {
-        toast.success("Tweet eliminado", {
-          theme: "colored",
-        });
-        setReloadTweets(true);
-      } else {
-        toast.error("Error al eliminar el tweet", {
-          theme: "colored",
-        });
-      }
-    });
-  };
-
   const version = new Date().getTime();
-
   useEffect(() => {
     getUserApi(tweet.userid).then((response) => {
       if (response) {
         setUserInfo(response);
+
         setAvatarUrl(
           response?.avatar
             ? `${S3_URL}${response.avatar}?v=${version}`
@@ -60,6 +43,17 @@ function Tweet(props) {
       }
     });
   }, [tweet]);
+
+  const imageFullUrl = tweet?.imagen ? `${S3_URL}${tweet.imagen}` : null;
+
+  const deleteTweet = () => {
+    deleteTweetApi(tweet._id).then((response) => {
+      if (response?.code === 200) {
+        toast.success("Tweet eliminado", { theme: "colored" });
+        setReloadTweets(true);
+      }
+    });
+  };
 
   return (
     <div className="tweet">
@@ -76,15 +70,11 @@ function Tweet(props) {
             __html: replaceURLWithHTMLLinks(tweet.mensaje),
           }}
         />
-        {tweet?.imagen && (
-          <Image
-            src={`${S3_URL}${tweet.imagen}`}
-            className="image-tweet"
-            fluid
-          />
+
+        {imageFullUrl && (
+          <Image src={imageFullUrl} className="image-tweet" fluid />
         )}
 
-        {/* BOTÓN ABAJO A LA DERECHA */}
         {loggedUser?._id === tweet.userid && (
           <div className="tweet-actions">
             <Button variant="link" className="btn-delete" onClick={deleteTweet}>

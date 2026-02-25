@@ -1,58 +1,97 @@
 @import "../../../scss/index.scss";
 
 .tweet-modal {
-    .modal-content {
-        background-color: $background-grey-dark;
-        border-radius: 25px;
-        overflow: hidden;
-        color: $font-light !important;
+  .modal-content {
+    background-color: $background-grey-dark;
+    border-radius: 25px;
+    overflow: hidden;
 
-        .modal-header {
-            border-bottom: 1px solid $border-grey;
-            padding: 15px;
+    .modal-header {
+      border-bottom: 1px solid $border-grey;
+      padding: 15px;
 
-            .modal-title {
-                svg {
-                    width: 15px;
-                    height: 15px;
-                    fill: $primary;
-                    margin-left: 10px;
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
-            }
+      .modal-title {
+        svg {
+          width: 15px;
+          height: 15px;
+          fill: $primary;
+          margin-left: 10px;
+          &:hover {
+            cursor: pointer;
+          }
         }
-
-        .modal-body {
-            padding: 0;
-
-            form {
-                textarea {
-                    background-color: $background-grey-dark;
-                    border: 0;
-                    font-size: 20px;
-                    color: $font-light;
-                    padding: 10px 20px;
-                    resize: none;
-                    &:focus {
-                        box-shadow: none;
-                    }
-                }
-                .count {
-                    margin: 15px;
-                    &.error {
-                        color: $danger;
-                    }
-                }
-                button {
-                    width: 100%;
-                    height: 60px;
-                    font-weight: bold;
-                    font-size: 18px;
-                    margin-top: 10px;
-                }
-            }
-        }
+      }
     }
+
+    .modal-body {
+      padding: 0;
+
+      form {
+        textarea {
+          background-color: $background-grey-dark;
+          border: 0;
+          font-size: 20px;
+          color: $font-light;
+          padding: 10px 20px;
+          resize: none;
+          &:focus { box-shadow: none; }
+        }
+
+        .image-preview {
+          margin: 10px 20px;
+          height: 150px;
+          background-size: cover;
+          background-position: center;
+          border-radius: 15px;
+          border: 1px solid $border-grey;
+        }
+
+        
+        .btns-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 20px;
+          margin-bottom: 5px;
+
+          .camera-icon {
+            cursor: pointer;
+            outline: none;
+            
+            svg {
+              width: 25px;
+              fill: $font-light; 
+              transition: fill 0.2s ease;
+
+              @media (min-width: 768px) {
+                width: 30px; 
+              }
+
+              &:hover {
+                fill: $primary; 
+              }
+            }
+          }
+        }
+
+        .count {
+          margin: 15px; 
+          color: $font-light;
+          font-weight: bold;
+          &.error {
+            color: $danger !important;
+          }
+        }
+
+        button {
+          width: 100%;
+          height: 60px;
+          font-weight: bold;
+          font-size: 18px;
+          margin-top: 10px;
+          border: 0;
+        }
+      }
+    }
+  }
 }

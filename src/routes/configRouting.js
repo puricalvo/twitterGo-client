@@ -10,14 +10,14 @@ export default [
     page: Users,
   },
   {
-    path: "/:id",
-    exact: true,
-    page: User,
-  },
-  {
     path: "/",
     exact: true,
     page: Home,
+  },
+  {
+    path: "/:id",
+    exact: true,
+    page: User,
   },
 
   {
