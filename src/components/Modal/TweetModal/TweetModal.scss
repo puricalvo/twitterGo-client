@@ -37,13 +37,51 @@
           &:focus { box-shadow: none; }
         }
 
-        .image-preview {
-          margin: 10px 20px;
-          height: 150px;
-          background-size: cover;
-          background-position: center;
-          border-radius: 15px;
-          border: 1px solid $border-grey;
+        .image-preview-container {
+          position: relative;
+          margin-top: 10px;
+
+          .image-preview {
+            width: 100%;
+            // --- CAMBIOS PARA RESPONSIVE ---
+            height: 15vh;         // En móviles ocupa el 30% de la altura de la pantalla
+            max-height: 250px;    // En pantallas grandes no pasará de 400px
+            min-height: 100px;    // Nunca será más pequeña de 200px para que se vea algo
+            // -------------------------------
+            
+            border-radius: 20px;
+            background-size: contain; 
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease; // Para que el cambio de tamaño sea fluido
+          }
+
+          .remove-image {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            z-index: 10; // Asegura que la X esté siempre encima
+
+            svg {
+              width: 18px;
+              height: 18px;
+              fill: $primary;
+            }
+
+            &:hover {
+              background-color: $primary;
+            }
+          }
         }
 
         
@@ -88,7 +126,7 @@
           height: 60px;
           font-weight: bold;
           font-size: 18px;
-          margin-top: 10px;
+          margin-top: 5px;
           border: 0;
         }
       }

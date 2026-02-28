@@ -24,6 +24,12 @@ export default function TweetModal(props) {
     setShow(false);
   };
 
+  // Función nueva para eliminar solo la imagen
+  const removeImage = () => {
+    setFile(null);
+    setPreviewUrl(null);
+  };
+
   const onChange = (e) => {
     setMessage(e.target.value);
   };
@@ -54,7 +60,6 @@ export default function TweetModal(props) {
 
       try {
         const compressedFile = await imageCompression(file, options);
-
         const response = await uploadImageTweetApi(compressedFile);
 
         if (response && response.includes("tweetImage")) {
@@ -115,10 +120,15 @@ export default function TweetModal(props) {
           />
 
           {previewUrl && (
-            <div
-              className="image-preview"
-              style={{ backgroundImage: `url('${previewUrl}')` }}
-            />
+            <div className="image-preview-container">
+              <div
+                className="image-preview"
+                style={{ backgroundImage: `url('${previewUrl}')` }}
+              />
+              <div className="remove-image" onClick={removeImage}>
+                <Close />
+              </div>
+            </div>
           )}
 
           <div className="btns-container">
