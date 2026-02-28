@@ -7,7 +7,6 @@ import {
   faUser,
   faUsers,
   faPowerOff,
-  faPen,
   faFeatherPointed,
 } from "@fortawesome/free-solid-svg-icons";
 import TweetModal from "../Modal/TweetModal";

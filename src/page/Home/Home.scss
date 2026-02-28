@@ -5,6 +5,16 @@
         border-bottom: 1px solid $border-grey;
         padding: 15px;
 
+        /* --- AJUSTE PARA LA HAMBURGUESA --- */
+        // En móvil (menos de 768px) damos espacio al icono
+        padding-left: 75px; 
+
+        @media (min-width: 768px) {
+            // En PC volvemos al padding original
+            padding-left: 15px; 
+        }
+        /* ---------------------------------- */
+
         h2 {
             font-size: 22px;
             margin-bottom: 0;

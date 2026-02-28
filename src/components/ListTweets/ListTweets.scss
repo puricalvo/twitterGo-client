@@ -9,9 +9,16 @@
         .avatar {
             width: 50px;
             height: 50px;
+            min-width: 50px; // IMPORTANTE: evita que se aplaste por el flex-shrink
+            min-height: 50px;
             margin-right: 15px;
+            
+            // El truco mágico:
+            object-fit: cover; 
+            
+            // Por si la imagen es muy grande, asegura que no se salga del círculo
+            overflow: hidden;
         }
-
         .tweet-content {
             display: flex;
             flex-direction: column;

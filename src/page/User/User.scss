@@ -1,7 +1,6 @@
 @import "../../scss/index.scss";
 
 .user {
-
     &__title {
         border-bottom: 1px solid $border-grey;
         padding: 15px;
@@ -10,6 +9,15 @@
             font-size: 22px;
             margin-bottom: 0;
             font-weight: bold;
+
+            /* --- SEPARACIÓN PARA LA HAMBURGUESA --- */
+            padding-left: 60px; // Espacio para el icono en móvil
+
+            @media (min-width: 768px) {
+                padding-left: 0; // Volvemos al sitio en PC
+                font-size: 20px;
+            }
+            /* -------------------------------------- */
         }
     }
 
@@ -29,11 +37,10 @@
             border: 0;
 
             &:hover,
-            &:focus{
+            &:focus {
                 background-color: transparent !important;
                 color: $primary;
             }
         }
     }
-
 }

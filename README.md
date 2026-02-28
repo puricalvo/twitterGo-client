@@ -12,16 +12,19 @@ Esta es la interfaz de usuario de **TwitterGo**, una réplica de las funciones p
 ## ✨ Características
 * **Registro e inicio de sesión**: Autenticación segura.
 * **Timeline Inteligente**: Visualización de Tweets de los usuarios que sigues.
+* **Navegación Móvil Adaptativa**: Menú lateral en escritorio y menú desplegable (hamburguesa) en dispositivos móviles para una experiencia nativa.
+* **Gestión Centralizada de Tweets**: Sistema de modales global que permite twittear desde cualquier sección de la app.
 * **Multimedia**: Subida de imágenes a **Amazon S3**.
 * **Optimización de carga**: Compresión de imágenes en el cliente antes de la subida para mayor velocidad.
-* **Perfil de usuario**: Edición de banner, avatar y biografía.
-* **Diseño responsivo**: Estilos adaptados con SASS para una experiencia móvil perfecta.
+* **Perfil de usuario**: Edición de banner, avatar y biografía con previsualización en tiempo real.
+* **Diseño responsivo avanzado**: Estilos pulidos con **SASS**, garantizando que los títulos, avatares y elementos interactivos se adapten perfectamente a cualquier tamaño de pantalla.
 
 ## 🛠️ Tecnologías utilizadas
 * **React** - Librería principal.
 * **React Bootstrap** - Para el diseño y componentes.
-* **SASS** - Preprocesador de estilos.
-* **Browser-image-compression** - Para optimizar el rendimiento.
+* **SASS** - Estilos modulares y variables personalizadas.
+* **Browser-image-compression** - Optimización de rendimiento en subidas.
+* **Moment.js** - Gestión amigable de fechas y tiempos de publicación.
 * **GitHub Pages** - Hosting del frontend.
 
 ## 🔗 Backend

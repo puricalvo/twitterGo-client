@@ -1,6 +1,8 @@
 
 @import "../../scss/index.scss";
 
+@import "../../scss/index.scss";
+
 .users {
   &__title {
     padding: 15px;
@@ -8,7 +10,6 @@
     align-items: center;
     justify-content: space-between;
     
-    // Ajuste para móvil: uno debajo de otro
     @media (max-width: 500px) {
       flex-direction: column;
       align-items: flex-start;
@@ -18,12 +19,20 @@
       font-size: 22px;
       margin-bottom: 0;
       font-weight: bold;
+
+      /* --- ÚNICO CAMBIO: Desplazamos solo el texto del título --- */
+      padding-left: 60px; // Espacio para la hamburguesa en móvil
+
+      @media (min-width: 768px) {
+        padding-left: 0; // En PC vuelve a su sitio
+      }
+      /* --------------------------------------------------------- */
+
       @media (max-width: 500px) { margin-bottom: 10px; }
     }
 
     input {
       width: 50%;
-      // En móvil que ocupe casi todo el ancho
       @media (max-width: 500px) { width: 100%; }
       
       border-radius: 50px;

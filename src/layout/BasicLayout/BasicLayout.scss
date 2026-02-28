@@ -9,9 +9,36 @@
         height: 100vh;
         overflow-y: scroll;
         padding: 0 !important;
-        border-right: 1px solid $border-grey;
+        border-right: 1px solid $border-grey; // <--- TU BARRA DERECHA INTACTA
         &::-webkit-scrollbar {
             display: none;
+        }
+    }
+
+    // Estilo para que la hamburguesa "flote" a la izquierda del título en móvil
+    .mobile-nav-wrapper {
+        position: absolute; 
+        z-index: 999;
+        top: 12px; // Ajusta esto para que quede a la altura de tus H2
+        left: 15px;
+
+        .hamburger-icon {
+            cursor: pointer;
+            font-size: 24px;
+            color: $primary;
+        }
+
+        .dropdown-menu {
+            background-color: #000;
+            border: 1px solid $border-grey;
+            .dropdown-item {
+                color: white;
+                display: flex;
+                align-items: center;
+                padding: 10px 20px;
+                svg { margin-right: 15px; }
+                &:hover { background-color: $primary; }
+            }
         }
     }
 }
