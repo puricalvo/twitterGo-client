@@ -18,19 +18,16 @@ export function signUpApi(user) {
     body: JSON.stringify(userTemp),
   };
 
-  return fetch(url, params)
-    .then((response) => {
-      if (response.status >= 200 && response.status < 300) {
-        return response.json();
-      }
-      return { code: 404, message: "Email no disponible" };
-    })
-    .then((result) => {
-      return result;
-    })
-    .catch((err) => {
-      return err;
-    });
+  return fetch(url, params).then(async (response) => {
+    const message = await response.text();
+    if (!response.ok) {
+      return {
+        code: response.status,
+        message: message || "No se pudo crear la cuenta.",
+      };
+    }
+    return { success: true, message };
+  });
 }
 
 export function signInApi(user) {

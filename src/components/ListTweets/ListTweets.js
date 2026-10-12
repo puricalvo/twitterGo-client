@@ -3,7 +3,7 @@ import { Image, Button } from "react-bootstrap";
 import { map } from "lodash";
 import moment from "moment";
 import AvatarNoFound from "../../assets/png/avatar-no-found.png";
-import { S3_URL } from "../../utils/constant";
+import { IMAGE_URL } from "../../utils/constant";
 import { replaceURLWithHTMLLinks } from "../../utils/functions";
 import { getUserApi } from "../../api/user";
 import { deleteTweetApi } from "../../api/tweet";
@@ -37,14 +37,14 @@ function Tweet(props) {
 
         setAvatarUrl(
           response?.avatar
-            ? `${S3_URL}${response.avatar}?v=${version}`
+            ? `${IMAGE_URL}${response.avatar}?v=${version}`
             : AvatarNoFound,
         );
       }
     });
   }, [tweet]);
 
-  const imageFullUrl = tweet?.imagen ? `${S3_URL}${tweet.imagen}` : null;
+  const imageFullUrl = tweet?.imagen ? `${IMAGE_URL}${tweet.imagen}` : null;
 
   const deleteTweet = () => {
     deleteTweetApi(tweet._id).then((response) => {

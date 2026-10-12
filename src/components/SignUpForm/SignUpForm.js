@@ -41,22 +41,22 @@ export default function SignUpForm(props) {
         });
       } else {
         setSignUpLoading(true);
-        toast.success("¡Registro correcto!", {
-          theme: "colored",
-        });
         signUpApi(formData)
           .then((response) => {
-            if (response?.code) {
+            if (!response?.success) {
               toast.warning(response.message, {
                 theme: "colored",
               });
             } else {
+              toast.success("¡Registro correcto!", {
+                theme: "colored",
+              });
               setShowModal(false);
               setFormData(initialFormValue());
             }
           })
-          .catch(() => {
-            toast.error("Error del servidor, inténtelo más tarde!", {
+          .catch((error) => {
+            toast.error(error.message || "Error del servidor, inténtelo más tarde!", {
               theme: "colored",
             });
           })

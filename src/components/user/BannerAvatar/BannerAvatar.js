@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import ConfigModal from "../../Modal/ConfigModal";
 import EditUserForm from "../../user/EditUserForm";
 import AvatarNoFound from "../../../assets/png/avatar-no-found.png";
-import { S3_URL } from "../../../utils/constant";
+import { IMAGE_URL } from "../../../utils/constant";
 import {
   checkFollowApi,
   followUserApi,
@@ -21,11 +21,11 @@ export default function BannerAvatar(props) {
   //const [reloadFollow, setReloadFollow] = useState(false);
 
   const bannerUrl = user?.banner
-    ? `${S3_URL}${user.banner}?v=${version}`
+    ? `${IMAGE_URL}${user.banner}?v=${version}`
     : null;
 
   const avatarUrl = user?.avatar
-    ? `${S3_URL}${user.avatar}?v=${version}`
+    ? `${IMAGE_URL}${user.avatar}?v=${version}`
     : AvatarNoFound;
 
   const userId = user?.id;

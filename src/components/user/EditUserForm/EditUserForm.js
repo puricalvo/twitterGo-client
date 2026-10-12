@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import es from "date-fns/locale/es";
 import { useDropzone } from "react-dropzone";
 import { toast } from "react-toastify";
-import { S3_URL } from "../../../utils/constant";
+import { IMAGE_URL } from "../../../utils/constant";
 import { Camera } from "../../../utils/Icons";
 import {
   uploadBannerApi,
@@ -21,12 +21,12 @@ export default function EditUserForm(props) {
   const [version] = useState(new Date().getTime());
 
   const [bannerUrl, setBannerUrl] = useState(
-    user?.banner ? `${S3_URL}${user.banner}?v=${version}` : null,
+    user?.banner ? `${IMAGE_URL}${user.banner}?v=${version}` : null,
   );
   const [bannerFile, setBannerFile] = useState(null);
 
   const [avatarUrl, setAvatarUrl] = useState(
-    user?.avatar ? `${S3_URL}${user.avatar}?v=${version}` : null,
+    user?.avatar ? `${IMAGE_URL}${user.avatar}?v=${version}` : null,
   );
   const [avatarFile, setAvatarFile] = useState(null);
 

@@ -1,3 +1,4 @@
-export const API_HOST = "TU_API_GATEWAY_AQUI";
+export const API_HOST =
+  process.env.REACT_APP_API_HOST || "http://localhost:8080";
 export const TOKEN = "token";
-export const S3_URL = "TU_API_S3_AQUI";
+export const IMAGE_URL = `${API_HOST.replace(/\/$/, "")}/images/`;
